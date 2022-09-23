@@ -22,16 +22,17 @@ function saveToLocalStorage(event) {
     .catch((err)=>console.log(err))
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-    const localStorageObj = localStorage;
-    const localstoragekeys  = Object.keys(localStorageObj)
 
-    for(var i =0; i< localstoragekeys.length; i++){
-        const key = localstoragekeys[i]
-        const userDetailsString = localStorageObj[key];
-        const userDetailsObj = JSON.parse(userDetailsString);
-        showNewUserOnScreen(userDetailsObj)
-    }
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/496a4298dc184d40bb348179ac7d8db9/appointmentData")
+    .then((response)=>{
+    
+         for(var i=0;i<response.data.length;i++){
+            showNewUserOnScreen(response.data[i]);
+         }
+    })
+    .catch((err)=>console.log(err))
+    
 })
 
 function showNewUserOnScreen(user){
