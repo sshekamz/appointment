@@ -5,10 +5,6 @@ function saveToLocalStorage(event) {
     const email = event.target.emailId.value;
     const phonenumber = event.target.phonenumber.value;
 
-    
-    // localStorage.setItem('name', name);
-    // localStorage.setItem('email', email);
-    // localStorage.setItem('phonenumber', phonenumber)
     const obj = {
         name,
         email,
@@ -41,14 +37,14 @@ function showNewUserOnScreen(user){
     document.getElementById('username').value = '';
     document.getElementById('phonenumber').value ='';
     // console.log(localStorage.getItem(user.emailId))
-    if(localStorage.getItem(user.email) !== null){
-        removeUserFromScreen(user.email)
-    }
+    // if(localStorage.getItem(user.email) !== null){
+    //     removeUserFromScreen(user.email)
+    //}
 
     const parentNode = document.getElementById('listOfUsers');
     const childHTML = `<li id=${user._id}> ${user.name} - ${user.email} - ${user.phonenumber}
                             <button onclick=deleteUser('${user._id}')> Delete User </button>
-                            <button onclick=editUserDetails('${user._id}','${user.name}','${user.phonenumber}')>Edit User </button>
+                            <button onclick=editUserDetails('${user._id}','${user.email}','${user.name}','${user.phonenumber}')>Edit User </button>
                          </li>`
 
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
@@ -56,13 +52,13 @@ function showNewUserOnScreen(user){
 
 //Edit User
 
-function editUserDetails(emailId, name, phonenumber){
+function editUserDetails(userId,emailId, name, phonenumber){
 
     document.getElementById('email').value = emailId;
     document.getElementById('username').value = name;
     document.getElementById('phonenumber').value =phonenumber;
 
-    deleteUser(emailId)
+    deleteUser(userId)
  }
 
 // deleteUser('abc@gmail.com')
@@ -85,5 +81,6 @@ function removeUserFromScreen(userID){
     }
 }
 
-//DELETE
+//PUT
+
 
